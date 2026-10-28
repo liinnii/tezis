@@ -1,0 +1,445 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Тезис и прямой ответ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;800&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+/* Лёгкая светлая страница урока: голубая палитра, плитки расписания, карточки и тренажёры */
+:root{--icy:#AED5F5;--azure:#367ADF;--sky:#4FACE5;--french:#394988;--char:#353A4C;--pale:#EEF6FD;--ok:#2E9E6B;--bad:#D9534F;
+--muted:#59627a;--f-head:Alegreya,Georgia,serif;--f-body:Nunito,system-ui,sans-serif;color-scheme:light;box-sizing:border-box}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:#fff;color:var(--char);font:400 18px/1.6 var(--f-body)}
+h1,h2,h3{font-family:var(--f-head);margin:0;line-height:1.15;text-wrap:balance}
+main{max-width:860px;margin:0 auto;padding-block:28px 60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.star{width:1em;height:1em;flex:none}
+header{text-align:center;padding:30px 0 10px}
+h1{font-size:clamp(32px,6.5vw,52px);color:var(--french);font-weight:800}
+.sub{color:var(--azure);font-weight:600;margin-top:10px}
+section{margin-top:54px}
+h2{font-size:clamp(28px,5vw,38px);color:var(--french);display:flex;gap:12px;align-items:center;font-weight:800}
+h2 .star{color:var(--sky);width:.8em;height:.8em}
+.lead{color:var(--muted);margin:8px 0 22px}
+.row{display:flex;gap:10px;margin-bottom:10px}
+.tile{width:84px;flex:none;border-radius:18px;display:grid;place-items:center;font-size:36px}
+.bar{flex:1;min-width:0;border-radius:18px;padding:14px 20px}
+.bar h3{font-size:24px}
+.bar p{margin:2px 0 0;font-size:16px}
+.r1 .tile,.r1 .bar{background:var(--icy)}.r1 .tile{color:var(--azure)}.r1 h3{color:var(--azure)}
+.r2 .tile,.r2 .bar{background:var(--azure)}.r2 .tile{color:var(--char)}.r2 .bar{color:#fff}.r2 h3{color:#fff}
+.r3 .tile,.r3 .bar{background:var(--sky)}.r3 .tile{color:var(--char)}.r3 .bar{color:#0f2236}.r3 h3{color:#0f2236}
+.r4 .tile,.r4 .bar{background:var(--french)}.r4 .tile{color:var(--icy)}.r4 .bar{color:#E6EEFA}.r4 h3{color:var(--icy)}
+.r5 .tile,.r5 .bar{background:var(--char)}.r5 .tile{color:var(--sky)}.r5 .bar{color:#E3E8F2}.r5 h3{color:var(--sky)}
+.card{background:var(--pale);border:2px solid var(--icy);border-radius:22px;padding:20px 22px;margin:14px 0;min-width:0}
+.card h3{font-size:24px;color:var(--french);margin-bottom:6px}
+.card p{margin:6px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:14px}
+.grid .card{margin:0}
+.note{background:#fff;border-left:6px solid var(--sky);border-radius:0 14px 14px 0;padding:10px 16px;margin:12px 0}
+.formula{background:#fff;border:2px dashed var(--sky);border-radius:18px;padding:14px 18px;margin:12px 0;font:800 clamp(19px,3.6vw,24px)/1.4 var(--f-head);color:var(--french);text-align:center}
+.formula em{font-style:normal;color:var(--azure)}
+.trainer{background:#fff;border:2px solid var(--azure);border-radius:24px;padding:22px;text-align:center;margin:18px 0}
+.trainer .tag{color:var(--azure);font-weight:800;margin-bottom:6px}
+.trainer .cnt{color:var(--muted);font-weight:700;font-size:16px;margin-bottom:6px}
+.btns{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:14px 0}
+button{font:800 20px var(--f-body);border:0;border-radius:16px;padding:12px 22px;background:var(--azure);color:#fff;cursor:pointer;min-width:56px}
+button:hover{background:var(--french)}
+button.alt{background:var(--icy);color:var(--french)}
+button.alt:hover{background:var(--sky);color:#0f2236}
+button:focus-visible,summary:focus-visible,.sn:focus-visible,.chip:focus-visible,textarea:focus-visible{outline:3px solid var(--french);outline-offset:2px}
+.msg{min-height:30px;font-weight:800}
+.msg.ok{color:var(--ok)}.msg.bad{color:var(--bad)}
+.score{color:var(--muted);font-weight:600}
+ul.clean{list-style:none;padding:0;margin:8px 0}
+ul.clean li{padding:6px 0 6px 34px;position:relative;text-align:left}
+ul.clean li::before{content:"✦";position:absolute;left:4px;color:var(--sky)}
+details{background:var(--pale);border:2px solid var(--icy);border-radius:20px;padding:6px 20px;margin:14px 0}
+summary{cursor:pointer;font:800 22px var(--f-head);color:var(--french);padding:10px 0}
+.check label{display:flex;gap:12px;align-items:flex-start;padding:7px 0;cursor:pointer}
+.check input{width:22px;height:22px;accent-color:var(--azure);margin-top:4px;flex:none}
+.grade{display:inline-block;font:800 28px var(--f-head);color:#fff;background:var(--azure);border-radius:16px;padding:8px 22px;margin-top:8px}
+footer{margin-top:50px;border-radius:18px;background:var(--pale);color:var(--azure);text-align:center;padding:14px;font-weight:700}
+@media(max-width:520px){.tile{width:62px;font-size:28px}.bar{padding:12px 14px}.trainer{padding:18px 14px}}
+.hack{display:flex;gap:14px;align-items:flex-start;background:#fff;border:2px solid var(--icy);border-radius:20px;padding:14px 18px;margin:10px 0}
+.hack>div:last-child{min-width:0}
+.hack .n{flex:none;width:42px;height:42px;border-radius:14px;background:var(--azure);color:#fff;display:grid;place-items:center;font:800 22px var(--f-head)}
+.hack:nth-child(even) .n{background:var(--sky);color:#0f2236}
+.hack b{color:var(--french)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.pills span{background:#fff;border:2px solid var(--icy);border-radius:999px;padding:4px 14px;font:800 20px var(--f-head);color:var(--french)}
+.pills.no span{text-decoration:line-through;text-decoration-color:var(--bad);color:var(--muted)}
+.chip{display:inline-block;margin:3px;padding:3px 10px;border-radius:10px;border:2px solid var(--icy);cursor:pointer;background:#fff;font-weight:600;font-size:19px}
+.chip.on{background:var(--azure);color:#fff;border-color:var(--azure)}
+.text{text-align:left;font-size:19px;line-height:2}
+.sn{cursor:pointer;border-radius:8px;padding:2px 3px}
+.sn:hover{background:var(--icy)}
+.sn.pick{background:var(--azure);color:#fff}
+.sn.ans{background:#DDF3E8;color:var(--char);box-shadow:inset 0 0 0 2px var(--ok)}
+.p{margin:8px 0;padding:10px 14px;background:#fff;border:1px solid var(--icy);border-radius:12px;text-align:left}
+.q{font-size:21px;text-align:left;background:var(--pale);border-radius:16px;padding:12px 16px;margin:10px 0;font-weight:600}
+.btns.opts{flex-direction:column;align-items:stretch}
+.opt{font:800 19px/1.35 var(--f-head);padding:12px 18px;text-align:left;width:100%}
+.opt.good{background:var(--ok);color:#fff}.opt.no{background:#FBE0DF;color:var(--bad)}
+.mt{display:grid;gap:8px;text-align:left}
+.mt label{font-weight:800;color:var(--french)}
+textarea{width:100%;font:inherit;border:2px solid var(--icy);border-radius:14px;padding:10px;color:var(--char);background:#fff}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;font-size:17px}
+th{background:var(--azure);color:#fff;text-align:left;padding:8px 12px;font-family:var(--f-head);font-size:20px}
+td{padding:8px 12px;border-top:1px solid var(--icy);vertical-align:top}
+.tw{overflow-x:auto}
+.tw table{min-width:520px}
+.today td:first-child{background:#DDF3E8;font-weight:800;color:#1d6b49}
+</style>
+
+<main>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="s" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c.6 6.6 4.9 11.4 12 12-7.1.6-11.4 5.4-12 12-.6-6.6-4.9-11.4-12-12C7.100 11.400 11.400 6.600 12 0z"/></symbol></svg>
+
+<header>
+  <h1>Сочинение 13.3: тезис и прямой ответ</h1>
+  <div class="sub">Урок на 60 минут: учимся отвечать на вопрос задания с первой фразы</div>
+</header>
+
+<section style="margin-top:28px">
+  <h2><svg class="star"><use href="#s"/></svg>План урока</h2>
+  <p class="lead">Сначала смотрим, как устроено сочинение, потом учимся отвечать прямо, потом пишем свой тезис.</p>
+  <div class="row r1"><div class="tile"><svg class="star"><use href="#s"/></svg></div><div class="bar"><h3>0–5 мин. Разминка</h3><p>Отвечаем на вопрос «Что такое…?» вслух, одним предложением</p></div></div>
+  <div class="row r2"><div class="tile"><svg class="star"><use href="#s"/></svg></div><div class="bar"><h3>5–17 мин. Структура и тезис</h3><p>4 абзаца, что такое тезис, 2 тренажёра</p></div></div>
+  <div class="row r3"><div class="tile"><svg class="star"><use href="#s"/></svg></div><div class="bar"><h3>17–30 мин. Прямой ответ</h3><p>Клише, вопрос «Почему…?», ошибки, слова вопроса, тренажёр</p></div></div>
+  <div class="row r4"><div class="tile"><svg class="star"><use href="#s"/></svg></div><div class="bar"><h3>30–50 мин. Пишем тезис</h3><p>Свой тезис, проверка по чек-листу, обмен в парах, образец</p></div></div>
+  <div class="row r5"><div class="tile"><svg class="star"><use href="#s"/></svg></div><div class="bar"><h3>50–60 мин. Итоги</h3><p>Чек-лист, самооценка, домашнее задание</p></div></div>
+  <div class="note"><b>Разминка.</b> Учитель задаёт вопросы по очереди: <i>«Что такое смелость?»</i>, <i>«В чём проявляется вежливость?»</i>, <i>«Что такое настоящий друг?»</i>. Ученики отвечают вслух одним предложением и начинают его сразу с ответа: <i>«Смелость — это…»</i>, <i>«Вежливость проявляется в…»</i>. Потом спросите: кто начал с «ну…», «вообще-то…» или «это сложный вопрос»? Так выглядит уход от прямого ответа, и в сочинении он стоит баллов.</div>
+</section>
+
+<section>
+  <h2><svg class="star"><use href="#s"/></svg>Структура и тезис</h2>
+  <p class="lead">В задании 13.3 есть вопрос о понятии. Весь первый абзац сочинения отвечает на него.</p>
+
+  <div class="card"><h3>Сочинение 13.3: четыре абзаца</h3>
+    <div class="tw"><table class="today"><tr><th>Абзац</th><th>Что пишем</th></tr>
+    <tr><td>1. Тезис</td><td>Прямой ответ на вопрос задания, 1–2 предложения. Сегодняшняя тема.</td></tr>
+    <tr><td>2. Аргумент 1</td><td>Первый пример из текста и пояснение: что он доказывает. Номер предложения указывай в скобках.</td></tr>
+    <tr><td>3. Аргумент 2</td><td>Другой пример. Он не повторяет первый и может быть из текста, из жизни, из книги или фильма.</td></tr>
+    <tr><td>4. Заключение</td><td>Вывод, который возвращается к тезису, но другими словами. Новых мыслей не добавляем.</td></tr></table></div>
+    <div class="note">Объём не меньше 70 слов, иначе работа получает 0 баллов. Лучше написать 90–100 слов: так мысль раскрыта полностью. Сочинение короткое, поэтому тезис не растягивают: он занимает одно-два предложения. Актуальные требования смотрите в демоверсии ФИПИ.</div>
+  </div>
+
+  <div class="grid">
+    <div class="card"><h3>Какое сочинение выбрать</h3><p>В задании 13 три темы на выбор, пишешь одну:</p><p><b>13.1</b> — лингвистическая тема;<br><b>13.2</b> — по цитате из текста;<br><b>13.3</b> — морально-нравственная тема. Сегодня работаем с ней.</p></div>
+    <div class="card"><h3>Что проверяет эксперт</h3><p><b>Содержание:</b> раскрыта ли тема, есть ли примеры.<br><b>Логика и речь:</b> нет ли противоречий и речевых ошибок.<br><b>Грамотность:</b> орфография, пунктуация, грамматика.</p><p>Тезис работает на первый пункт: без ясного ответа вся работа шатается.</p></div>
+  </div>
+
+  <div class="grid">
+    <div class="card"><h3>Вопрос задания</h3><p><i>«В чём проявляется доброта?»</i>, <i>«Что такое настоящая дружба?»</i> или <i>«Почему у человека должна быть цель в жизни?»</i></p></div>
+    <div class="card"><h3>Тезис</h3><p>Мысль, которую ты будешь доказывать. Это твой краткий ответ на вопрос.</p></div>
+    <div class="card"><h3>Аргумент</h3><p>Пример из текста и пояснение. Сегодня мы до них не идём, они на следующем уроке.</p></div>
+  </div>
+
+  <div class="card"><h3>Из чего состоит тезис</h3>
+    <div class="formula"><em>слово из вопроса</em> + <em>ответ</em> + <em>пояснение</em></div>
+    <p><b>Вопрос:</b> <i>В чём проявляется доброта?</i></p>
+    <p><b>Тезис:</b> <i>Доброта проявляется в умении заметить чужую трудность и помочь, не ожидая благодарности.</i></p>
+    <div class="note">Слово из вопроса: «доброта». Ответ: «проявляется в умении заметить чужую трудность и помочь». Пояснение: «не ожидая благодарности». Если в вопросе понятие, объясни его своими словами.</div>
+  </div>
+
+  <div class="card"><h3>Вопрос «Почему…?»</h3>
+    <p>Бывает, что в задании не «что такое», а «почему». Тогда тезис отвечает причиной: сначала сам ответ, потом «потому что».</p>
+    <div class="formula"><em>слово из вопроса</em> + <em>ответ</em> + <em>потому что…</em></div>
+    <p><b>Вопрос:</b> <i>Почему у человека должна быть цель в жизни?</i></p>
+    <p><b>Тезис:</b> <i>Цель в жизни нужна человеку, потому что она придаёт смысл каждому дню и помогает не сдаваться, когда трудно.</i></p>
+    <div class="note">Не оставляй «потому что» пустым: «потому что так надо» — это не причина. Назови то, что цель даёт человеку.</div>
+  </div>
+
+  <div class="hack"><div class="n">1</div><div><b>Найди в вопросе понятие.</b> «Доброта», «дружба», «мужество»: оно обязательно прозвучит в тезисе.</div></div>
+  <div class="hack"><div class="n">2</div><div><b>Отвечай в форме вопроса.</b> «В чём проявляется…?» отвечает «…проявляется в…». «Что такое…?» отвечает «…это…». «Почему…?» отвечает «…, потому что…».</div></div>
+  <div class="hack"><div class="n">3</div><div><b>Объясни понятие своими словами.</b> Не выучивай словарную статью: проверяющему важно, как ты понимаешь слово.</div></div>
+  <div class="hack"><div class="n">4</div><div><b>Одна мысль, одно-два предложения.</b> Длинное вступление отнимает слова, которые нужны для примеров.</div></div>
+  <div class="hack"><div class="n">5</div><div><b>Пиши то, что сможешь подтвердить.</b> Спроси себя: какие два примера я найду (из текста, из жизни, из книги)? Не нашёл, значит, тезис надо менять.</div></div>
+
+  <div class="note">Вопросы в тренажёрах составлены в духе открытого банка заданий ОГЭ. Для домашнего задания берите формулировки из самого банка ФИПИ.</div>
+
+  <div class="trainer" id="t1">
+    <div class="tag">Тренажёр 1: найди тезис во вступлении</div>
+    <div class="cnt"></div>
+    <div class="q"></div>
+    <p class="score" style="margin:0 0 8px">Нажми на предложение, которое прямо отвечает на вопрос задания.</p>
+    <div class="text"></div>
+    <div class="msg"></div>
+    <div class="btns"><button class="chk1">Проверить</button><button class="alt rs1">Сбросить</button><button class="alt nx1">Дальше</button></div>
+    <div class="score sc1"></div>
+  </div>
+
+  <div class="trainer" id="q1">
+    <div class="tag">Тренажёр 2: выбери тезис</div>
+    <div class="cnt"></div>
+    <div class="q"></div><div class="btns opts"></div><div class="msg"></div>
+    <div class="btns"><button class="alt nx">Дальше</button></div><div class="score"></div>
+  </div>
+</section>
+
+<section>
+  <h2><svg class="star"><use href="#s"/></svg>Прямой ответ</h2>
+  <p class="lead">Читатель должен увидеть ответ в первой же фразе, а не искать его между строк.</p>
+
+  <div class="card"><h3>Клише для тезиса</h3>
+    <div class="tw"><table><tr><th>Вопрос</th><th>Так можно начать</th></tr>
+    <tr><td>В чём проявляется доброта?</td><td>На мой взгляд, доброта проявляется в…<br>Я думаю, что доброта проявляется в…<br>По моему мнению, доброта проявляется в…</td></tr>
+    <tr><td>Что такое настоящая дружба?</td><td>Мне кажется, что настоящая дружба — это…<br>На мой взгляд, настоящая дружба — это…</td></tr>
+    <tr><td>Почему у человека должна быть цель в жизни?</td><td>Я считаю, что цель в жизни нужна каждому человеку, потому что…<br>Цель необходима человеку, потому что…</td></tr>
+    <tr><td>Любой вопрос</td><td>Над этим задумываются немногие. Я считаю, что…</td></tr></table></div>
+    <div class="note">Клише только помогают начать. Пользоваться именно ими не обязательно, главное в тезисе ответ.</div>
+  </div>
+
+  <div class="grid">
+    <div class="card"><h3>Так начинают</h3><div class="pills"><span>…проявляется в…</span><span>…это…</span><span>Я считаю, что…</span><span>На мой взгляд…</span></div></div>
+    <div class="card"><h3>Так не начинают</h3><div class="pills no"><span>Тема очень актуальна</span><span>С давних времён</span><span>В наше время</span><span>Каждый человек</span></div></div>
+  </div>
+
+  <h3 style="margin:26px 0 4px;font-size:28px;color:var(--french)">Три частые ошибки</h3>
+  <div class="grid">
+    <div class="card"><h3>Нет ответа</h3><p><i>«Тема доброты очень важна.»</i></p><p>Тему похвалили, но на вопрос не ответили. <b>Как исправить:</b> начни с «доброта проявляется в…» и допиши, в чём.</p></div>
+    <div class="card"><h3>Определение по кругу</h3><p><i>«Доброта проявляется в том, что человек добрый.»</i></p><p>Слово объяснено тем же словом. <b>Как исправить:</b> спроси себя, что именно делает добрый человек.</p></div>
+    <div class="card"><h3>Не по теме</h3><p><i>«В тексте рассказывается о мальчике и его соседе.»</i></p><p>Это пересказ, а не ответ на вопрос. <b>Как исправить:</b> тезис говорит о понятии, а сюжет оставь для примеров.</p></div>
+  </div>
+
+  <div class="card"><h3>Ещё одна ловушка: подмена понятия</h3>
+    <p>Вопрос о цели, а в тезисе речь о мечтах «вообще» или о любви: тема сползла. Так же бывает, когда начал о совести, а пример привёл про дружбу.</p>
+    <p><b>Как избежать:</b> перед каждым предложением сверяйся со словом из вопроса. А пример должен подтверждать именно твой тезис, а не соседнюю мысль.</p>
+    <div class="note">Ещё две логические ошибки из разбора экзамена: тезис противоречит сам себе (сначала «герой плохой», потом пример его благородного поступка) и пример не доказывает тезис.</div>
+  </div>
+
+  <div class="card"><h3>Слова вопроса возвращаются в тезисе</h3>
+    <div class="tw"><table><tr><th>Вопрос</th><th>Начало тезиса</th><th>Вернули</th></tr>
+    <tr><td>В чём проявляется доброта?</td><td>Доброта проявляется в…</td><td>проявляется, доброта</td></tr>
+    <tr><td>Что такое честность?</td><td>Честность — это верность правде…</td><td>честность</td></tr>
+    <tr><td>В чём проявляется забота о человеке?</td><td>Забота о человеке проявляется во внимании…</td><td>проявляется, забота, о человеке</td></tr></table></div>
+    <div class="note">Слово можно заменить синонимом, но хотя бы главное слово вопроса оставь. Так сразу видно, что ты отвечаешь именно на этот вопрос. В заключении ты вернёшься к той же мысли, поэтому тезис должен быть чётким.</div>
+  </div>
+
+  <div class="trainer" id="t3">
+    <div class="tag">Тренажёр 3: отметь слова вопроса</div>
+    <div class="cnt"></div>
+    <p class="score" style="margin:0 0 8px">Нажми на слова вопроса, которые должны прозвучать в тезисе. Одно лишнее слово не страшно.</p>
+    <div class="text kwbox"></div>
+    <div class="msg"></div>
+    <div class="btns"><button class="chk3">Проверить</button><button class="alt rs3">Сбросить</button><button class="alt nx3">Дальше</button></div>
+    <div class="score sc3"></div>
+  </div>
+</section>
+
+<section>
+  <h2><svg class="star"><use href="#s"/></svg>Пишем тезис</h2>
+  <p class="lead">Теперь всё вместе: вопрос, слово из вопроса, ответ, пояснение.</p>
+
+  <div class="hack"><div class="n">1</div><div><b>Выбери вопрос.</b> Прочитай его и подчеркни понятие.</div></div>
+  <div class="hack"><div class="n">2</div><div><b>Начни с ответа.</b> Запиши «… проявляется в…» или «… это…» и закончи мысль.</div></div>
+  <div class="hack"><div class="n">3</div><div><b>Поясни своими словами.</b> Что именно делает человек, в чём это видно?</div></div>
+  <div class="hack"><div class="n">4</div><div><b>Проверь и обменяйся.</b> Пройди по чек-листу, потом поменяйтесь тетрадями с соседом: пусть он подчеркнёт в тезисе ответ.</div></div>
+
+  <div class="trainer" id="p1">
+    <div class="tag">Практика: напиши свой тезис</div>
+    <div class="cnt"></div>
+    <div class="q"></div>
+    <div class="mt">
+      <label for="th">Твой тезис (1–2 предложения)</label>
+      <textarea id="th" rows="3" placeholder="Например: …проявляется в…"></textarea>
+    </div>
+    <div class="msg" id="hint"></div>
+    <div class="btns"><button class="alt nxp">Другой вопрос</button></div>
+    <div class="card check" id="chp" style="text-align:left">
+      <h3>Проверь себя</h3>
+      <label><input type="checkbox">В тезисе есть слово-понятие из вопроса.</label>
+      <label><input type="checkbox">Есть прямой ответ: «… проявляется в…» или «… это…».</label>
+      <label><input type="checkbox">Понятие объяснено своими словами, не по кругу.</label>
+      <label><input type="checkbox">Это одна мысль в одном-двух предложениях.</label>
+      <label><input type="checkbox">Я найду два примера (из текста, из жизни или из книги), которые её подтвердят.</label>
+      <div class="grade" id="gp">Отметь пункты</div>
+    </div>
+  </div>
+
+  <details>
+    <summary>Образец: три разных тезиса к одному вопросу (открой после своего)</summary>
+    <p style="margin:6px 0"><b>Вопрос:</b> <i>В чём проявляется доброта?</i></p>
+    <div class="tw"><table><tr><th>Что подчёркивает</th><th>Тезис</th></tr>
+    <tr><td>Внимание и помощь</td><td>Доброта проявляется в умении заметить чужую трудность и помочь, не ожидая благодарности.</td></tr>
+    <tr><td>Терпение</td><td>Доброта проявляется в терпении к людям: добрый человек не отвечает злом даже на грубость.</td></tr>
+    <tr><td>Дела, а не слова</td><td>Доброта проявляется в поступках, а не в словах: можно говорить ласково и оставаться равнодушным.</td></tr></table></div>
+    <div class="note">Тезисы различаются тем, в чём автор видит понятие, и каждый можно подтвердить двумя разными примерами. Ровно так же ты напишешь три тезиса в домашнем задании.</div>
+    <p style="margin:14px 0 6px"><b>Вопрос «Почему…?»:</b> <i>Почему у человека должна быть цель в жизни?</i></p>
+    <div class="tw"><table><tr><th>Что подчёркивает</th><th>Тезис</th></tr>
+    <tr><td>Смысл</td><td>Цель в жизни нужна человеку, потому что она объясняет, зачем просыпаться по утрам и ради чего стараться.</td></tr>
+    <tr><td>Стойкость</td><td>Цель нужна человеку, потому что она помогает не сдаваться: когда трудно, мечта даёт силы идти дальше.</td></tr>
+    <tr><td>Порядок</td><td>Цель нужна человеку, потому что она помогает выбрать главное и не разбрасываться на всё подряд.</td></tr></table></div>
+  </details>
+
+  <details>
+    <summary>Для учителя: ход урока и на что смотреть</summary>
+    <ul class="clean">
+      <li><b>Разминка (5 мин).</b> Три вопроса устно. Отмечайте, кто начал с ответа, и не оценивайте содержание.</li>
+      <li><b>Структура и тезис (12 мин).</b> Покажите таблицу из четырёх абзацев и разберите формулу на одном примере. Затем тренажёры 1 и 2: первый вместе, второй самостоятельно.</li>
+      <li><b>Прямой ответ (13 мин).</b> Клише и три ошибки разберите на примерах из тетрадей прошлых работ. Тренажёр 3 ученики проходят в парах.</li>
+      <li><b>Пишем тезис (20 мин).</b> 5 минут на тезис, 5 на проверку по чек-листу, 5 на обмен в парах, 5 на разбор: зачитайте два-три тезиса к одному вопросу и спросите, чем они различаются.</li>
+      <li><b>Итоги (10 мин).</b> Чек-лист, затем объяснение домашнего задания: покажите образец с тремя тезисами.</li>
+      <li>Следите за определениями по кругу («доброта — это когда человек добрый»): это самая частая ошибка в тезисах.</li>
+      <li>Покажите разницу между вопросами «Что такое…?», «В чём проявляется…?» и «Почему…?»: у каждого своя связка («это», «проявляется в», «потому что»).</li>
+      <li>Следующий урок: первый аргумент, то есть пример из текста с номером предложения и пояснение к нему. Второй пример можно брать из жизни или из прочитанного.</li>
+      <li>Заключение разберите позже: оно возвращается к тезису другими словами («Таким образом…», «Итак…»), новых мыслей не вводит.</li>
+    </ul>
+  </details>
+</section>
+
+<section>
+  <h2><svg class="star"><use href="#s"/></svg>Итоги</h2>
+  <p class="lead">Отметь то, что у тебя получилось на этом уроке.</p>
+  <div class="card check" id="chk">
+    <label><input type="checkbox">Я назову четыре абзаца сочинения 13.3 и объясню, что пишут в первом.</label>
+    <label><input type="checkbox">Я отвечаю на вопрос в первой же фразе.</label>
+    <label><input type="checkbox">Я возвращаю в тезисе слово-понятие из вопроса.</label>
+    <label><input type="checkbox">Я объясняю понятие своими словами, а не по кругу.</label>
+    <label><input type="checkbox">Я отличаю тезис от пересказа и от пустой фразы о важности темы.</label>
+    <label><input type="checkbox">Мой тезис можно подтвердить двумя примерами.</label>
+    <div class="grade" id="gr">Отметь пункты</div>
+  </div>
+
+  <div class="card"><h3>Домашнее задание (около 8 минут)</h3>
+    <ul class="clean">
+      <li><b>1 мин.</b> Выбери один вопрос задания 13.3 из открытого банка ФИПИ. Подойдёт формулировка «Что такое…?», «В чём проявляется…?» или «Почему…?».</li>
+      <li><b>4 мин.</b> Напиши три разных тезиса к этому вопросу. Пусть они различаются тем, в чём ты видишь понятие.</li>
+      <li><b>3 мин.</b> Выбери лучший и объясни выбор в 3–4 предложениях.</li>
+    </ul>
+    <div class="note"><b>По каким признакам выбирать.</b> Тезис прямо отвечает на вопрос. В нём есть слово из вопроса. Понятие объяснено своими словами. Для него найдутся два разных примера. Назови в объяснении хотя бы два-три признака.</div>
+    <div class="p"><i>Шаблон: «Лучший тезис № …, потому что он отвечает на вопрос прямо, повторяет слово «…» и объясняет его так: …. Я смогу подтвердить его двумя примерами».</i></div>
+  </div>
+
+  <div class="card"><h3>Памятка на экзамен</h3>
+    <ul class="clean">
+      <li><b>Сначала план на черновике:</b> тезис, первый пример, второй пример, заключение.</li>
+      <li><b>Проверь дважды.</b> Первый раз на смысл: есть ли ответ на вопрос, все ли части на месте. Второй раз на грамотность: читай с конца к началу, так заметнее ошибки.</li>
+      <li><b>Делись на абзацы.</b> Сплошной текст эксперту трудно проверять, и баллы могут снизить.</li>
+      <li><b>Не повторяй слова.</b> Если «герой» в каждом предложении, замени его именем или местоимением.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>Сначала ответ. Потом пояснение. Потом примеры из текста.</footer>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+
+/* Банк вопросов. q: вопрос задания; k: слова вопроса; i: вступление (предложения); t: номер предложения-тезиса;
+   b: неверные тезисы: о нет ответа, т определение по кругу, п не по теме */
+const T=[
+ {q:'В чём проявляется доброта?',k:['проявляется','доброта'],t:1,
+  i:['Добрые поступки люди замечают сразу.','Доброта проявляется в умении заметить чужую трудность и помочь, не ожидая благодарности.','Обратимся к тексту, чтобы убедиться в этом.'],
+  b:['о:Тема доброты всегда волновала людей.','т:Доброта проявляется в том, что человек добрый.','п:В тексте рассказывается о мальчике и его соседе.']},
+ {q:'В чём проявляется человечность?',k:['проявляется','человечность'],t:1,
+  i:['Слово «человечность» мы слышим часто.','Человечность проявляется в готовности защитить слабого и не пройти мимо чужой беды.','Докажу это примерами из текста.'],
+  b:['о:Человечность важна в любом обществе и в любое время.','т:Человечность проявляется в человечных поступках.','п:Герои текста живут в одном доме и редко разговаривают.']},
+ {q:'Что такое настоящая дружба?',k:['настоящая','дружба'],t:1,
+  i:['У каждого есть приятели, но друзей гораздо меньше.','Настоящая дружба — это умение прийти на помощь в трудную минуту и сказать правду, даже неприятную.','Обратимся к тексту.'],
+  b:['о:Дружба занимает важное место в жизни человека.','т:Настоящая дружба — это когда люди настоящие друзья.','п:Главные герои текста учатся в одном классе.']},
+ {q:'В чём проявляется мужество?',k:['проявляется','мужество'],t:1,
+  i:['Мужество принято связывать с войной.','Мужество проявляется в готовности поступить правильно, даже когда страшно и никто не заставляет.','Покажу это на примерах из текста.'],
+  b:['о:Мужество нужно каждому человеку.','т:Мужество проявляется в мужественных поступках.','п:В тексте описан случай на реке.']},
+ {q:'Что такое ответственность?',k:['ответственность'],t:1,
+  i:['Ответственность часто путают с послушанием.','Ответственность — это умение отвечать за свои поступки и исправлять их последствия.','Обратимся к тексту.'],
+  b:['о:Ответственность является важным качеством человека.','т:Ответственность — это когда человек ответственный.','п:Герой текста получил поручение от старшего брата.']},
+ {q:'В чём проявляется забота о человеке?',k:['проявляется','забота','человеке'],t:1,
+  i:['Заботу не всегда легко заметить.','Забота о человеке проявляется во внимании к его трудностям и готовности помочь без напоминаний.','Докажу это примерами из текста.'],
+  b:['о:Забота нужна каждому человеку.','т:Забота проявляется в том, что люди заботятся друг о друге.','п:В тексте описана семья, в которой несколько героев.']},
+ {q:'Что такое честность?',k:['честность'],t:1,
+  i:['Правду говорить непросто.','Честность — это верность правде в словах и поступках, даже когда она невыгодна.','Обратимся к тексту.'],
+  b:['о:Честность ценится во все времена.','т:Честность — это когда человек честный.','п:Автор текста рассказывает о школьной контрольной.']},
+ {q:'Что такое сострадание?',k:['сострадание'],t:1,
+  i:['Чужую боль иногда трудно заметить.','Сострадание — это умение почувствовать чужую боль как свою и не остаться равнодушным.','Докажу это на примерах из текста.'],
+  b:['о:Сострадание знакомо многим людям.','т:Сострадание — это когда человек сострадает другим.','п:В тексте описан холодный зимний день.']},
+ {q:'В чём проявляется благодарность?',k:['проявляется','благодарность'],t:1,
+  i:['Слово «спасибо» мы произносим каждый день.','Благодарность проявляется не только в словах, но и в готовности помнить добро и отвечать на него добром.','Обратимся к тексту.'],
+  b:['о:Благодарность важна для всех людей.','т:Благодарность проявляется в том, что человек благодарит.','п:Героиня текста получила письмо от подруги.']},
+ {q:'Что такое взаимопомощь?',k:['взаимопомощь'],t:1,
+  i:['В одиночку справиться с бедой трудно.','Взаимопомощь — это когда люди поддерживают друг друга без расчёта на выгоду.','Докажу это примерами из текста.'],
+  b:['о:Взаимопомощь существует в любом обществе.','т:Взаимопомощь — это когда люди оказывают друг другу помощь.','п:Герои текста строят дом на окраине деревни.']},
+ {q:'Почему у человека должна быть цель в жизни?',k:['человека','цель','жизни'],t:1,
+  i:['Каждое утро мы встаём и что-то делаем.','Цель в жизни нужна человеку, потому что она придаёт смысл дням и помогает не сдаваться, когда трудно.','Докажу это примерами.'],
+  b:['о:Тема цели в жизни очень важна для каждого.','т:Цель нужна человеку, потому что у него должна быть цель.','п:В тексте рассказывается о мальчике, который мечтал стать лётчиком.']},
+ {q:'Почему важно говорить правду?',k:['важно','правду'],t:1,
+  i:['Правда не всегда приятна.','Говорить правду важно, потому что без неё люди перестают доверять друг другу.','Обратимся к тексту.'],
+  b:['о:Правда нужна в любое время.','т:Говорить правду важно, потому что правда важна.','п:Герой текста солгал учителю про домашнее задание.']}
+];
+const WHY={
+ 'о':'нет ответа. Фраза говорит, что тема важна, но на вопрос не отвечает.',
+ 'т':'определение по кругу. Слово объяснено тем же словом, нового ответа нет.',
+ 'п':'не по теме. Это пересказ текста, а не ответ на заданный вопрос.'
+};
+
+/* 1. найди тезис во вступлении */
+(function(){const r=$('t1'),box=r.querySelector('.text'),m=r.querySelector('.msg'),cn=r.querySelector('.cnt'),q=r.querySelector('.q'),sc=r.querySelector('.sc1');
+ let i=-1,ok=0,n=0,pick,counted,tries,spans=[];
+ function load(){const t=T[i];pick=-1;counted=false;tries=0;m.textContent='';m.className='msg';box.innerHTML='';
+  cn.textContent='Текст '+(i+1)+' из '+T.length;q.textContent='Вопрос задания: «'+t.q+'»';
+  spans=t.i.map((txt,j)=>{const s=document.createElement('span');s.className='sn';s.textContent=txt+' ';s.tabIndex=0;s.setAttribute('role','button');
+   const sel=()=>{spans.forEach(x=>x.classList.remove('pick'));s.classList.add('pick');pick=j;m.textContent='';m.className='msg'};
+   s.onclick=sel;s.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();sel()}};box.appendChild(s);return s})}
+ function next(){i=(i+1)%T.length;if(i===0){ok=0;n=0;sc.textContent=''}load()}
+ r.querySelector('.chk1').onclick=()=>{const t=T[i];
+  if(pick<0){m.className='msg bad';m.textContent='Сначала нажми на предложение.';return}
+  const good=pick===t.t;tries++;
+  if(good){m.className='msg ok';m.textContent='Верно! Это тезис: он прямо отвечает на вопрос и объясняет понятие.';spans[t.t].classList.remove('pick');spans[t.t].classList.add('ans')}
+  else if(tries>=2){m.className='msg bad';m.textContent='Тезис здесь: «'+t.i[t.t]+'» Он отвечает на вопрос прямо.';spans.forEach(x=>x.classList.remove('pick'));spans[t.t].classList.add('ans')}
+  else{m.className='msg bad';m.textContent='Не то. В этом предложении нет ответа на вопрос задания. Попробуй ещё раз.'}
+  if(!counted){counted=true;n++;if(good)ok++;sc.textContent='Верно с первого раза: '+ok+' из '+n}};
+ r.querySelector('.rs1').onclick=()=>{pick=-1;spans.forEach(x=>x.classList.remove('pick','ans'));m.textContent='';m.className='msg'};
+ r.querySelector('.nx1').onclick=next;next()})();
+
+/* 2. выбери тезис */
+(function(){const L=T.slice(5).concat(T.slice(0,5));
+ const r=$('q1'),q=r.querySelector('.q'),o=r.querySelector('.opts'),m=r.querySelector('.msg'),sc=r.querySelector('.score'),cn=r.querySelector('.cnt');let i=-1,ok=0,n=0,done,goodBtn;
+ function next(){i=(i+1)%L.length;if(i===0){ok=0;n=0;sc.textContent=''}const t=L[i];done=false;m.textContent='';m.className='msg';
+  cn.textContent='Вопрос '+(i+1)+' из '+L.length;q.textContent='Вопрос задания: «'+t.q+'»';o.innerHTML='';
+  const opts=[{t:t.i[t.t],g:true}].concat(t.b.map(b=>({t:b.slice(2),g:false,w:WHY[b[0]]})));
+  shuffle(opts).forEach(x=>{const b=document.createElement('button');b.className='alt opt';b.textContent=x.t;if(x.g)goodBtn=b;
+   b.onclick=()=>{if(done)return;done=true;n++;if(x.g)ok++;b.classList.add(x.g?'good':'no');if(!x.g)goodBtn.classList.add('good');
+    m.className='msg '+(x.g?'ok':'bad');
+    m.textContent=x.g?'Верно! В тезисе есть слово из вопроса, ответ и пояснение.':'Не то: '+x.w+' Верный тезис выделен зелёным.';
+    sc.textContent='Верно: '+ok+' из '+n};o.appendChild(b)})}
+ r.querySelector('.nx').onclick=next;next()})();
+
+/* 3. слова вопроса */
+(function(){const r=$('t3'),box=r.querySelector('.kwbox'),m=r.querySelector('.msg'),cn=r.querySelector('.cnt'),sc=r.querySelector('.sc3');
+ const cl=w=>w.replace(/[.,:;!?«»]/g,'').toLowerCase();let i=-1,ok=0,n=0,counted,KEY;
+ function load(){const t=T[i];KEY=t.k;counted=false;m.textContent='';m.className='msg';box.innerHTML='';
+  cn.textContent='Вопрос '+(i+1)+' из '+T.length;
+  t.q.split(' ').forEach(w=>{const c=document.createElement('span');c.className='chip';c.textContent=w;c.tabIndex=0;c.setAttribute('role','button');
+   const tg=()=>{c.classList.toggle('on');m.textContent='';m.className='msg'};c.onclick=tg;c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tg()}};box.appendChild(c)})}
+ function next(){i=(i+1)%T.length;if(i===0){ok=0;n=0;sc.textContent=''}load()}
+ r.querySelector('.chk3').onclick=()=>{const on=[...box.children].filter(c=>c.classList.contains('on')).map(c=>cl(c.textContent)),
+  hit=on.filter(w=>KEY.includes(w)),extra=on.filter(w=>!KEY.includes(w)),miss=KEY.filter(w=>!on.includes(w));
+  const good=!miss.length&&extra.length<=1;
+  if(good){m.className='msg ok';m.textContent=extra.length?'Хорошо! Все нужные слова найдены. Лишнее: '+extra.join(', ')+'.':'Отлично! Найдено слов вопроса: '+KEY.length+', лишнего нет.'}
+  else{m.className='msg bad';m.textContent='Найдено: '+hit.length+' из '+KEY.length+'.'+(extra.length?' Лишнее: '+extra.join(', ')+'.':'')+(miss.length?' Пропущено: '+miss.join(', ')+'.':'')}
+  if(!counted){counted=true;n++;if(good)ok++;sc.textContent='Верно с первого раза: '+ok+' из '+n}};
+ r.querySelector('.rs3').onclick=()=>{[...box.children].forEach(c=>c.classList.remove('on'));m.textContent='';m.className='msg'};
+ r.querySelector('.nx3').onclick=next;next()})();
+
+/* чек-листы */
+function bindCheck(boxId,gradeId,total,words){const bs=[...$(boxId).querySelectorAll('input')],g=$(gradeId);
+ const f=()=>{const n=bs.filter(b=>b.checked).length;g.textContent=n===0?'Отметь пункты':n+' из '+total+': '+(n===total?words[2]:n>=total-2?words[1]:words[0])};
+ bs.forEach(b=>b.onchange=f);return {reset:()=>{bs.forEach(b=>b.checked=false);f()}}}
+
+/* 4. практика: свой тезис */
+(function(){const PT=T.map(x=>({q:x.q,k:x.k})).concat([
+  {q:'Почему нужно уважать чужое мнение?',k:['уважать','чужое','мнение']},{q:'Что такое смелость?',k:['смелость']},{q:'В чём проявляется уважение к людям?',k:['проявляется','уважение']},
+  {q:'Что такое трудолюбие?',k:['трудолюбие']},{q:'В чём проявляется любовь к природе?',k:['проявляется','любовь','природе']}]);
+ const r=$('p1'),q=r.querySelector('.q'),cn=r.querySelector('.cnt'),ta=$('th'),h=$('hint');
+ const ck=bindCheck('chp','gp',5,['пока рано, доработай тезис','почти готово, проверь слабые пункты','тезис готов']);
+ let i=-1;const stem=k=>k.slice(0,Math.max(3,k.length-3)).toLowerCase();
+ const upd=()=>{const ks=PT[i].k.filter(k=>k.length>3),v=ta.value.toLowerCase(),f=ks.filter(k=>v.includes(stem(k)));
+  h.className='msg'+(ks.length&&f.length===ks.length?' ok':'');
+  h.textContent=ks.length?'Слова вопроса: '+ks.join(', ')+'. В твоём тезисе найдено: '+f.length+' из '+ks.length+'.':''};
+ const next=()=>{i=(i+1)%PT.length;cn.textContent='Вопрос '+(i+1)+' из '+PT.length;q.textContent='Вопрос задания: «'+PT[i].q+'»';ta.value='';ck.reset();upd()};
+ ta.oninput=upd;r.querySelector('.nxp').onclick=next;next()})();
+
+/* 5. итоговый чек-лист */
+bindCheck('chk','gr',6,['ещё потренируем','хорошо, повтори слабые пункты','отлично, ты готов к сочинению']);
+</script>
+
+</body></html>
